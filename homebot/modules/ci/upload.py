@@ -1,7 +1,7 @@
 from ftplib import FTP, error_perm
-from homebot import get_config
-from homebot.core.logging import LOGI
-from homebot.modules.ci.artifacts import Artifact
+from tg_bot import get_config
+from tg_bot.core.logging import LOGI
+from tg_bot.modules.ci.artifacts import Artifact
 import os.path
 import paramiko
 from pathlib import Path

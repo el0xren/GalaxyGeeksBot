@@ -1,6 +1,6 @@
 from git.exc import GitCommandError
 from github import Github, GithubException
-from homebot import get_config
+from tg_bot import get_config
 from pathlib import Path
 import requests
 from telegram import Update

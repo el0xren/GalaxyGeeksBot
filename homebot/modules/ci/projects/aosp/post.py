@@ -1,5 +1,5 @@
-from homebot import get_config
-from homebot.modules.ci.projects.aosp.project import AOSPProject
+from tg_bot import get_config
+from tg_bot.modules.ci.projects.aosp.project import AOSPProject
 from telegram.ext import CallbackContext
 
 chat_id = get_config("CI_CHANNEL_ID")

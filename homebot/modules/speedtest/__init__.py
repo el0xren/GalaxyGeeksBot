@@ -1,4 +1,4 @@
-from homebot.core.logging import LOGI
+from tg_bot.core.logging import LOGI
 from speedtest import Speedtest
 from telegram.ext import CallbackContext
 from telegram.update import Update

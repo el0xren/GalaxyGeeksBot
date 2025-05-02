@@ -1,5 +1,5 @@
-from homebot import get_config
-from homebot.core.logging import LOGI
+from tg_bot import get_config
+from tg_bot.core.logging import LOGI
 
 def user_is_admin(user_id):
 	"""

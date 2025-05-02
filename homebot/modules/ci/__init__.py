@@ -1,7 +1,7 @@
-from homebot import get_config
-from homebot.core.admin import user_is_admin
-from homebot.core.logging import LOGE, LOGI
-from homebot.modules.ci.parser import CIParser
+from tg_bot import get_config
+from tg_bot.core.admin import user_is_admin
+from tg_bot.core.logging import LOGE, LOGI
+from tg_bot.modules.ci.parser import CIParser
 from importlib import import_module
 from telegram.ext import CallbackContext
 from telegram.update import Update
@@ -25,7 +25,7 @@ def ci(update: Update, context: CallbackContext):
 	args, _ = parser.parse_known_args(args_passed)
 
 	try:
-		project_module = import_module('homebot.modules.ci.projects.' + args.project, package="*")
+		project_module = import_module('tg_bot.modules.ci.projects.' + args.project, package="*")
 	except ImportError:
 		update.message.reply_text("Error: Project script not found")
 		return

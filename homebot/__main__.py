@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-from homebot.main import main
+from tg_bot.main import main
 
 if __name__ == '__main__':
     main()

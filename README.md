@@ -1,7 +1,7 @@
-# ZajavaBot, a modular Telegram bot, written in Python
+# GalaxyGeeksBot, a modular Telegram bot, written in Python
 
 ## How to use it
-- Clone `https://github.com/el0xren/ZajavaBot`
+- Clone `https://github.com/el0xren/GalaxyGeeksBot`
 - Execute `pip3 install .` to install all the dependencies
 - Rename `example_config.env` to `config.env`
 - Put a bot token in `config.env`
@@ -9,7 +9,7 @@
 - Launch the bot by typing
 
 ```bash
-python3 -m homebot
+python3 -m tg_bot
 ```
 ## Deploy to Heroku
 The following env variables are supported:
@@ -31,7 +31,7 @@ The following env variables are supported:
 - `CI_TWRPDTGEN_CHANNEL_ID`: Channel ID where to post new releases.
 - `WEATHER_API_KEY`: Weather api get one from `https://openweathermap.org/api`.
 - `WEATHER_TEMP_UNIT`: Supported values: Fahrenheit `imperial`, Celsius `metric`, Kelvin `empty`
-<a href="https://heroku.com/deploy?template=https://github.com/el0xren/ZajavaBot">
+<a href="https://heroku.com/deploy?template=https://github.com/el0xren/GalaxyGeeksBot">
   <img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy">
 </a>
 
@@ -53,4 +53,4 @@ The following env variables are supported:
 
 Want to see how this bot works or you want to create a module for this bot?
 
-Head over to [the wiki](https://github.com/SebaUbuntu/HomeBot/wiki) for more informations
+Head over to [the wiki](https://github.com/SebaUbuntu/tg_bot/wiki) for more informations

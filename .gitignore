@@ -91,5 +91,5 @@ dmypy.json
 # Logs
 log.txt
 
-# ZajavaBot configuration file
+# GalaxyGeeksBot configuration file
 config.env

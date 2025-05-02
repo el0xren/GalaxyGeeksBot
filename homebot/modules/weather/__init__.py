@@ -1,5 +1,5 @@
-from homebot import get_config
-from homebot.core.logging import LOGE
+from tg_bot import get_config
+from tg_bot.core.logging import LOGE
 import requests
 from telegram.ext import CallbackContext
 from telegram.update import Update

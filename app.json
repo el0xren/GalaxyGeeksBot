@@ -1,7 +1,7 @@
 {
-  "name": "ZajavaBot",
+  "name": "GalaxyGeeksBot",
   "description": "A modular Telegram bot",
-  "repository": "https://github.com/el0xren/ZajavaBot",
+  "repository": "https://github.com/el0xren/GalaxyGeeksBot",
   "logo": "https://telegra.ph/file/cb19b254727161fad1b0a.jpg",
   "keywords": ["telegram", "modular", "bot"
    ],

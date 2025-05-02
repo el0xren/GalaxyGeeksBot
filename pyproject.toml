@@ -1,8 +1,9 @@
 [tool.poetry]
-name = "homebot"
-version = "2.1.0"
+name = "galaxygeeksbot"
+version = "0.1.0"
 description = "A Telegram bot written in Python"
 authors = ["Sebastiano Barezzi <barezzisebastiano@gmail.com>"]
+# el0xren <el0xren@gmail.com>
 
 [tool.poetry.dependencies]
 python = "^3.8"

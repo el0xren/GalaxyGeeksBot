@@ -1,4 +1,4 @@
-from homebot.core.admin import user_is_admin
+from tg_bot.core.admin import user_is_admin
 import subprocess
 from telegram.ext import CallbackContext
 from telegram.update import Update

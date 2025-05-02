@@ -1,10 +1,10 @@
-from homebot import bot_path, get_config
-from homebot.modules.ci.parser import CIParser
-from homebot.modules.ci.artifacts import Artifacts, STATUS_UPLOADING, STATUS_UPLOADED, STATUS_NOT_UPLOADED
-from homebot.modules.ci.projects.aosp.post import update_ci_post
-from homebot.modules.ci.projects.aosp.project import AOSPProject
-from homebot.modules.ci.projects.aosp.returncode import SUCCESS, ERROR_CODES, NEEDS_LOGS_UPLOAD
-from homebot.modules.ci.upload import Uploader
+from tg_bot import bot_path, get_config
+from tg_bot.modules.ci.parser import CIParser
+from tg_bot.modules.ci.artifacts import Artifacts, STATUS_UPLOADING, STATUS_UPLOADED, STATUS_NOT_UPLOADED
+from tg_bot.modules.ci.projects.aosp.post import update_ci_post
+from tg_bot.modules.ci.projects.aosp.project import AOSPProject
+from tg_bot.modules.ci.projects.aosp.returncode import SUCCESS, ERROR_CODES, NEEDS_LOGS_UPLOAD
+from tg_bot.modules.ci.upload import Uploader
 from importlib import import_module
 from pathlib import Path
 import subprocess
@@ -30,7 +30,7 @@ def ci_build(update: Update, context: CallbackContext):
 
 	# Import project
 	project: AOSPProject
-	project = import_module('homebot.modules.ci.projects.aosp.projects.' + args.project, package="*").project
+	project = import_module('tg_bot.modules.ci.projects.aosp.projects.' + args.project, package="*").project
 
 	project_dir = Path(f"{get_config('CI_MAIN_DIR')}/{project.name}-{project.version}")
 	device_out_dir = project_dir / "out" / "target" / "product" / args.device

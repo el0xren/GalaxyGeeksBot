@@ -4,7 +4,7 @@ from types import FunctionType
 
 class Command:
 	"""
-	A class representing a HomeBot command
+	A class representing a tg_bot command
 	"""
 	def __init__(self, function: FunctionType, commands: list) -> None:
 		"""
@@ -17,12 +17,12 @@ class Command:
 
 class Module:
 	"""
-	A class representing a HomeBot module
+	A class representing a tg_bot module
 	"""
 	def __init__(self, name: str) -> None:
 		"""
 		Initialize the module class and import its commands.
 		"""
 		self.name = name
-		self.module = import_module('homebot.modules.' + self.name, package="*")
+		self.module = import_module('tg_bot.modules.' + self.name, package="*")
 		self.commands = [Command(command, self.module.commands[command]) for command in self.module.commands]
