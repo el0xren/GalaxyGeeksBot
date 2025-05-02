@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "galaxygeeksbot"
+name = "tg_bot"
 version = "0.1.0"
 description = "A Telegram bot written in Python"
 authors = ["Sebastiano Barezzi <barezzisebastiano@gmail.com>"]
