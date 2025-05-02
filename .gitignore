@@ -93,3 +93,6 @@ log.txt
 
 # GalaxyGeeksBot configuration file
 config.env
+
+# Authorized users
+authorized_users.json
