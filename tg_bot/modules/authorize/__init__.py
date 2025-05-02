@@ -5,7 +5,7 @@ from telegram.ext import CallbackContext
 from tg_bot.core.permissions import owner
 from tg_bot.core.modules_manager import Command
 
-authorized_file = Path("authorized_users.json")
+authorized_file = Path("tg_bot/authorized_users.json")
 
 if authorized_file.exists():
     with authorized_file.open("r") as f:

@@ -8,7 +8,7 @@ import json
 from pathlib import Path
 
 OWNER_ID = int(get_config("OWNER_ID"))
-authorized_file = Path("authorized_users.json")
+authorized_file = Path("tg_bot/authorized_users.json")
 
 def user_is_admin(user_id):
 	"""
