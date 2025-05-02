@@ -85,5 +85,11 @@ dmypy.json
 .idea/
 .vscode/
 
+# WSL stuff
+*:Zone.Identifier
+
+# Logs
+log.txt
+
 # ZajavaBot configuration file
 config.env
