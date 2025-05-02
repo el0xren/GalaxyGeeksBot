@@ -16,6 +16,8 @@ requests = "^2.25.1"
 speedtest-cli = "^2.1.2"
 twrpdtgen = "^1.2.5"
 natsort = "^7.1.1"
+beautifulsoup4 = "^4.12.2"
+ujson = "^5.8.0"
 
 [tool.poetry.dev-dependencies]
 
