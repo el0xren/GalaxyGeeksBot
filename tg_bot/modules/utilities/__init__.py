@@ -1,33 +1,35 @@
-import subprocess
 from subprocess import Popen, PIPE
 from telegram import Update
-from telegram.ext import CallbackContext
-from tg_bot.core.permissions import owner
-from tg_bot.core.modules_manager import Command
+from telegram.ext import CommandHandler, ContextTypes
+from telegram.error import BadRequest
+from tg_bot.core.permissions import owner, authorized
+import subprocess
+
 
 @owner
-def sh(update: Update, context: CallbackContext):
+async def sh(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     if len(context.args) < 1:
-        return update.message.reply_text("Usage: /sh <command>")
+        return await update.message.reply_text("Usage: /sh <command>")
 
     command = " ".join(context.args)
-    msg = update.message.reply_text(f"~$ {command}")
+    msg = await update.message.reply_text(f"~$ {command}")
 
     out = Popen(command, shell=True, stdout=PIPE, stderr=PIPE)
     stdout, stderr = out.communicate()
     output = (stderr + stdout).decode()
 
-    update.message.bot.edit_message_text(
+    await update.message.bot.edit_message_text(
         f"<b>~$ {command}</b>\n<code>{output}</code>",
         chat_id=update.message.chat_id,
         message_id=msg.message_id,
-        parse_mode="HTML"
+        parse_mode="HTML",
     )
 
+
 @owner
-def shell(update: Update, context: CallbackContext):
+async def shell(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     if len(context.args) < 1:
-        return update.message.reply_text("Usage: /shell <command>")
+        return await update.message.reply_text("Usage: /shell <command>")
 
     command = " ".join(context.args)
     try:
@@ -36,7 +38,7 @@ def shell(update: Update, context: CallbackContext):
             shell=True,
             executable="/bin/bash",
             stderr=subprocess.STDOUT,
-            universal_newlines=True
+            universal_newlines=True,
         )
         returncode = 0
         output = process
@@ -44,13 +46,28 @@ def shell(update: Update, context: CallbackContext):
         returncode = e.returncode
         output = e.output
 
-    update.message.reply_text(
-        f"Command: {command}\n"
-        f"Return code: {returncode}\n\n"
-        f"Output:\n{output}"
-    )
+    await update.message.reply_text(f"Command: {command}\n"
+                                    f"Return code: {returncode}\n\n"
+                                    f"Output:\n{output}")
 
-commands = {
-    sh: ['sh'],
-    shell: ['shell']
-}
+
+@authorized
+async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    args = update.effective_message.text.split(None, 1)
+    message = update.effective_message
+    if message.reply_to_message:
+        await message.reply_to_message.reply_text(args[1])
+    else:
+        await message.reply_text(args[1])
+    try:
+        await message.delete()
+    except BadRequest:
+        pass
+
+
+# Define commands as CommandHandler instances
+commands = [
+    CommandHandler("sh", sh),
+    CommandHandler("shell", shell),
+    CommandHandler("echo", echo),
+]

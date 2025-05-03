@@ -1,30 +1,39 @@
-from telegram.dice import Dice
-from telegram.ext import CallbackContext
-from telegram.update import Update
+from telegram import Dice
+from telegram import Update
+from telegram.ext import CommandHandler, ContextTypes
 
-def basket(update: Update, context: CallbackContext):
-	update.message.reply_dice(emoji=Dice.BASKETBALL)
 
-def bowling(update: Update, context: CallbackContext):
-	update.message.reply_dice(emoji=Dice.BOWLING)
+async def basket(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    await update.message.reply_dice(emoji=Dice.BASKETBALL)
 
-def dart(update: Update, context: CallbackContext):
-	update.message.reply_dice(emoji=Dice.DARTS)
 
-def dice(update: Update, context: CallbackContext):
-	update.message.reply_dice(emoji=Dice.DICE)
+async def bowling(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    await update.message.reply_dice(emoji=Dice.BOWLING)
 
-def football(update: Update, context: CallbackContext):
-	update.message.reply_dice(emoji=Dice.FOOTBALL)
 
-def slotmachine(update: Update, context: CallbackContext):
-	update.message.reply_dice(emoji=Dice.SLOT_MACHINE)
-    
-commands = {
-        basket: ['basket'],
-	bowling: ['bowling'],
-	dart: ['dart'],
-	dice: ['dice'],
-	football: ['football'],
-	slotmachine: ['slotmachine']
-}
+async def dart(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    await update.message.reply_dice(emoji=Dice.DARTS)
+
+
+async def dice(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    await update.message.reply_dice(emoji=Dice.DICE)
+
+
+async def football(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    await update.message.reply_dice(emoji=Dice.FOOTBALL)
+
+
+async def slotmachine(update: Update,
+                      context: ContextTypes.DEFAULT_TYPE) -> None:
+    await update.message.reply_dice(emoji=Dice.SLOT_MACHINE)
+
+
+# Define commands as CommandHandler instances
+commands = [
+    CommandHandler("basket", basket),
+    CommandHandler("bowling", bowling),
+    CommandHandler("dart", dart),
+    CommandHandler("dice", dice),
+    CommandHandler("football", football),
+    CommandHandler("slotmachine", slotmachine),
+]

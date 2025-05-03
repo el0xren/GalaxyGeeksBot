@@ -4,53 +4,59 @@
 
 from bs4 import BeautifulSoup
 from requests import get
-from telegram import Bot, Update, ParseMode
-from telegram.ext import Updater, CommandHandler
-from telegram.ext import CallbackContext
+from telegram import Update
+from telegram.ext import CommandHandler, ContextTypes
+from telegram.constants import ParseMode
 from ujson import loads
 
-def magisk(update: Update, context: CallbackContext):
+
+async def magisk(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    """Get the latest Magisk releases."""
     link = "https://raw.githubusercontent.com/topjohnwu/magisk_files/"
-    bot = context.bot
     magisk_dict = {
         "*Stable*": "master/stable.json",
-        "\n" "*Canary*": "canary/canary.json",
-    }.items()
+        "\n*Canary*": "canary/canary.json",
+    }
     releases = "*Latest Magisk Releases:*\n\n"
-    for magisk_type, release_url in magisk_dict:
-        canary = "https://github.com/topjohnwu/magisk_files/raw/canary/" if "Canary" in magisk_type else ""
+    for magisk_type, release_url in magisk_dict.items():
+        canary = ("https://github.com/topjohnwu/magisk_files/raw/canary/"
+                  if "Canary" in magisk_type else "")
         data = get(link + release_url).json()
         releases += (
             f"{magisk_type}:\n"
             f'• Manager - [{data["app"]["version"]} ({data["app"]["versionCode"]})]({canary + data["app"]["link"]}) \n'
             f'• Uninstaller - [Uninstaller {data["magisk"]["version"]} ({data["magisk"]["versionCode"]})]({canary + data["uninstaller"]["link"]}) \n'
         )
-    bot.send_message(
-        chat_id=update.effective_chat.id,
+    await update.effective_message.reply_text(
         text=releases,
         parse_mode=ParseMode.MARKDOWN,
         disable_web_page_preview=True,
     )
-    
-def orangefox(update: Update, context: CallbackContext):
-    bot, args = context.bot, context.args
-    message = update.effective_message
-    device = " ".join(args)
-    link = get(f"https://api.orangefox.download/v3/releases/?codename={device}&sort=date_desc&limit=1")
+
+
+async def orangefox(update: Update,
+                    context: ContextTypes.DEFAULT_TYPE) -> None:
+    """Get the latest OrangeFox Recovery for a device codename."""
+    device = " ".join(context.args)
     if not device:
-        update.effective_message.reply_text("Error: use /ofox codename")
+        await update.effective_message.reply_text("Error: use /ofox codename")
         return
-    elif link.status_code == 404:
-        message = f"OrangeFox currently is not avaliable for {device}"
+    link = get(
+        f"https://api.orangefox.download/v3/releases/?codename={device}&sort=date_desc&limit=1"
+    )
+    if link.status_code == 404:
+        message = f"OrangeFox currently is not available for {device}"
     else:
         page = loads(link.content)
         file_id = page["data"][0]["_id"]
-        link = get(f"https://api.orangefox.download/v3/devices/get?codename={device}")
+        link = get(
+            f"https://api.orangefox.download/v3/devices/get?codename={device}")
         page = loads(link.content)
         oem = page["oem_name"]
         model = page["model_name"]
         full_name = page["full_name"]
-        link = get(f"https://api.orangefox.download/v3/releases/get?_id={file_id}")
+        link = get(
+            f"https://api.orangefox.download/v3/releases/get?_id={file_id}")
         page = loads(link.content)
         dl_file = page["filename"]
         build_type = page["type"]
@@ -73,23 +79,22 @@ def orangefox(update: Update, context: CallbackContext):
         message += f"• File: {dl_file}\n"
         message += f"• MD5: {md5}\n\n"
         message += f"• <b>Download:</b> {dl_link}\n"
-    bot.send_message(
-        chat_id=update.effective_chat.id,
+    await update.effective_message.reply_text(
         text=message,
         parse_mode=ParseMode.HTML,
         disable_web_page_preview=True,
     )
 
-def twrp(update: Update, context: CallbackContext):
-    bot, args = context.bot, context.args
-    message = update.effective_message
-    device = " ".join(args)
-    link = get(f"https://eu.dl.twrp.me/{device}")
+
+async def twrp(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    """Get the latest TWRP for a device codename."""
+    device = " ".join(context.args)
     if not device:
-        update.effective_message.reply_text("Error: use /twrp codename")
+        await update.effective_message.reply_text("Error: use /twrp codename")
         return
-    elif link.status_code == 404:
-        message = f"TWRP currently is not avaliable for {device}"
+    link = get(f"https://eu.dl.twrp.me/{device}")
+    if link.status_code == 404:
+        message = f"TWRP currently is not available for {device}"
     else:
         page = BeautifulSoup(link.content, "lxml")
         download = page.find("table").find("tr").find("a")
@@ -103,15 +108,16 @@ def twrp(update: Update, context: CallbackContext):
         message += f"• Date: {date}\n"
         message += f"• File: {dl_file}\n\n"
         message += f"• <b>Download:</b> {dl_link}\n"
-    bot.send_message(
-        chat_id=update.effective_chat.id,
+    await update.effective_message.reply_text(
         text=message,
         parse_mode=ParseMode.HTML,
         disable_web_page_preview=True,
     )
-    
-commands = {
-    magisk : ['magisk', 'root', 'su'],
-    orangefox : ['ofox'],
-    twrp : ['twrp']
-}
+
+
+# Define commands as CommandHandler instances
+commands = [
+    CommandHandler(["magisk", "root", "su"], magisk),
+    CommandHandler("ofox", orangefox),
+    CommandHandler("twrp", twrp),
+]

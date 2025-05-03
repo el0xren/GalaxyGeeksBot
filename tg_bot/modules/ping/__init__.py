@@ -1,13 +1,17 @@
-import time
 from datetime import datetime
+from telegram import Update
+from telegram.ext import CommandHandler, ContextTypes
 
-def ping(update,context):
+
+async def ping(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     before = datetime.now()
-    message = update.message.reply_text("Appraising..")
-    now =  datetime.now()
-    res = (now-before).microseconds / 1000
-    update.message.bot.edit_message_text(f"ping = {res}ms",update.message.chat_id,message.message_id)
+    message = await update.message.reply_text("Appraising..")
+    now = datetime.now()
+    res = (now - before).microseconds / 1000
+    await message.edit_text(f"ping = {res}ms")
 
-commands = {
-	ping: ['ping']
-}
+
+# Define commands as CommandHandler instances
+commands = [
+    CommandHandler("ping", ping),
+]
