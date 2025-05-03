@@ -11,10 +11,12 @@
 ```bash
 python3 -m tg_bot
 ```
-## Deploy to Heroku
+## Variables
 The following env variables are supported:
+- `OWNER_ID`: Your Telegram ID.
 - `BOT_API_TOKEN`: Your Bot token. Get one from @botfather.
 - `BOT_ADMIN_USER_IDS`: Allowed users ID's.
+- `SUPPORT_CHAT_ID`: Your support Chat ID.
 - `CI_APPROVED_USER_IDS`: Allowed users ID's to use CI functions.
 - `CI_MAIN_DIR`: This folder needs to contain every project sources with proper folder naming (e.g. if you want to use LineageOS-17.1 script, a folder called "LineageOS-17.1" with the sources synced must be present in the specified main CI folder, so when you launch the command it will cd into Lineage-17.1 folder and start building). DON'T add a slash at the end of the path (eg. /home/foo).
 - `CI_CHANNEL_ID`: This variable contains the chat ID, the channel username or the channel ID that you want to use to post updates and build logs.
@@ -31,9 +33,6 @@ The following env variables are supported:
 - `CI_TWRPDTGEN_CHANNEL_ID`: Channel ID where to post new releases.
 - `WEATHER_API_KEY`: Weather api get one from `https://openweathermap.org/api`.
 - `WEATHER_TEMP_UNIT`: Supported values: Fahrenheit `imperial`, Celsius `metric`, Kelvin `empty`
-<a href="https://heroku.com/deploy?template=https://github.com/el0xren/GalaxyGeeksBot">
-  <img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy">
-</a>
 
 ## Features
 
@@ -54,3 +53,6 @@ The following env variables are supported:
 Want to see how this bot works or you want to create a module for this bot?
 
 Head over to [the wiki](https://github.com/SebaUbuntu/tg_bot/wiki) for more informations
+
+## Credits
+[4PERTURE](https://github.com/4PERTURE)
