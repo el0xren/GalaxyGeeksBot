@@ -2,7 +2,7 @@ import json
 from pathlib import Path
 from telegram import Update
 from telegram.ext import CommandHandler, ContextTypes
-from tg_bot.core.permissions import owner
+from tg_bot.core.permissions import owner, authorized
 
 authorized_file = Path("tg_bot/authorized_users.json")
 
@@ -83,7 +83,7 @@ async def unauthorize(update: Update,
         )
 
 
-@owner
+@authorized
 async def list_authorized(update: Update,
                           context: ContextTypes.DEFAULT_TYPE) -> None:
     """List all authorized users."""
