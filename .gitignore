@@ -90,6 +90,7 @@ dmypy.json
 
 # Logs
 log.txt
+logs
 
 # GalaxyGeeksBot configuration file
 config.env
