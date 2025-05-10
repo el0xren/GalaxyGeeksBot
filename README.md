@@ -55,4 +55,4 @@ Want to see how this bot works or you want to create a module for this bot?
 Head over to [the wiki](https://github.com/SebaUbuntu/tg_bot/wiki) for more informations
 
 ## Credits
-[4PERTURE](https://github.com/4PERTURE)
+[4PERTURE](https://github.com/4PERTURE) | [SebaUbuntu](https://github.com/SebaUbuntu)
