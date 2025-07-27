@@ -6,12 +6,12 @@ authors = ["Sebastiano Barezzi <barezzisebastiano@gmail.com>"]
 # el0xren <el0xren@gmail.com>
 
 [tool.poetry.group.dev.dependencies]
-python = "^3.9"  # Updated to 3.9+ for PTB v22.0
+python = "^3.9"
 cowsay = "^6.1"
 GitPython = "^3.1.14"
 paramiko = "^2.7.2"
 PyGithub = "^1.54.1"
-python-telegram-bot = "^22.0.0"  # Updated to latest
+python-telegram-bot = "^22.0.0"
 python-dotenv = "^0.15.0"
 requests = "^2.31.1"
 speedtest-cli = "^2.1.2"
@@ -20,8 +20,6 @@ natsort = "^7.1.1"
 beautifulsoup4 = "^4.12.2"
 ujson = "^5.8.0"
 aiohttp = ">=3.8,<4.0"
-
-[tool.poetry.group.dev.dependencies]
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
